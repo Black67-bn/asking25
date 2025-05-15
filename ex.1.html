@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Love Proposal 💖</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Pacifico&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Comic Neue', cursive;
+      background: linear-gradient(135deg, #ffe6f2, #ccf2ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #b30059;
+      overflow-x: hidden;
+    }
+    .proposal-box {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 30px rgba(179, 0, 89, 0.3);
+      padding: 3rem 2rem;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+      animation: fadeInScale 1.2s ease forwards;
+    }
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 1px 1px 3px #ff99cc;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+    button {
+      background: #ff66b3;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.3rem;
+      color: white;
+      border-radius: 9999px;
+      box-shadow: 0 6px 15px #ff3385;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    button:hover {
+      background: #e60073;
+      box-shadow: 0 8px 25px #e60073;
+    }
+    .message {
+      margin-top: 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #d1005b;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.5s ease;
+      user-select: none;
+    }
+    .message.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+    /* Heart Animation */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 18px;
+      background: #ff4da6;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-45deg);
+      animation: floatUp 3s ease forwards;
+      opacity: 0;
+      pointer-events: none;
+      filter: drop-shadow(0 0 3px #ff1a75);
+      border-radius: 10px 10px 0 0;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 18px;
+      background: #ff4da6;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      top: 0;
+      left: 10px;
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) rotate(-45deg) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(calc(-50% + 30px)) translateY(-150px) rotate(-45deg) scale(1.3);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="proposal-box">
+    <h1>Hey You! 💕</h1>
+    <p>I wanted to tell you something really special...</p>
+    <button id="loveBtn">Do you like me? 💓</button>
+    <div id="loveMessage" class="message"></div>
+  </div>
+
+  <script>
+    const loveBtn = document.getElementById('loveBtn');
+    const loveMessage = document.getElementById('loveMessage');
+
+    loveBtn.addEventListener('click', () => {
+      loveMessage.textContent = "Because I like you so much! Will you be my love? 💖 and also this is for you. I don't know when I started feeling for you but whenever I do, I tell you that I love you.";
+      loveMessage.classList.add('show');
+      loveBtn.disabled = true;
+      loveBtn.style.background = '#ccc';
+      loveBtn.style.cursor = 'default';
+
+      // Create floating hearts
+      for(let i = 0; i < 20; i++) {
+        createHeart(i * 150);
+      }
+    });
+
+    function createHeart(delay) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = (40 + Math.random() * 80) + '%';
+      heart.style.animationDelay = (delay / 1000) + 's';
+      document.body.appendChild(heart);
+
+      // Remove after animation
+      setTimeout(() => {
+        heart.remove();
+      }, delay + 3000);
+    }
+  </script>
+</body>
+</html>
+
